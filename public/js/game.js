@@ -1,14 +1,15 @@
 // Whole game script
 var Game = (function () {
     // Registration
-    var input = jQuery('#nickname'),
-        jQueryCanvas = jQuery('#canvas');
+    var nicknameInput = document.getElementById('nickname'),
+        playButton = document.getElementById('play_button'),
+        canvasElement = document.getElementById('canvas');
 
-    jQuery('#play_button').on('click', _startGame);
+    playButton.addEventListener('click', _startGame);
 
     function _startGame(event) {
-        ownNickname = input.val();
-        jQueryCanvas.removeClass('hide');
+        ownNickname = nicknameInput.value;
+        canvasElement.classList.remove('hidden');
         socket.emit('nickname', ownNickname);
 
         _init();
@@ -111,9 +112,6 @@ var Game = (function () {
     function _init() {
         canvas = document.getElementById('canvas');
         ctx = canvas.getContext('2d');
-
-        // ownPlayer = new Player('img/ownPlayer.png', standardSpriteWidth, standardSpriteHeight, Scene.spawnPlayer1, Scene.ground, standardWidth, standardHeight);
-        // enemyPlayer = new Player('img/enemyPlayer.png', standardSpriteWidth, standardSpriteHeight, Scene.spawnPlayer2, Scene.ground, standardWidth, standardHeight);
 
         _run();
     }
@@ -283,19 +281,9 @@ var Game = (function () {
         }
 
         if (ownPlayer.y > Scene.ground) {
-
             ownPlayer.jumping = false;
             ownPlayer.y = Scene.ground;
         }
-
-        // if (ownPlayer.y <= jumpHeight) {
-        //     // ownPlayer.y = jumpHeight;
-        //     ownPlayer.jumping = false;
-        // }
-
-        // stop moving if intersects with player 2
-        // if (ownPlayer.intersects(enemyPlayer))
-        //     ownPlayer.x = enemyPlayer.x - ownPlayer.width;
     }
 
 
@@ -463,8 +451,9 @@ var Game = (function () {
     }
 
     function _recognizePressedKey(evt) {
-        if (!pressing[evt.keyCode])
+        if (!pressing[evt.keyCode]) {
             lastPressed = evt.keyCode;
+        }
 
         pressing[evt.keyCode] = true;
     }
@@ -493,8 +482,6 @@ var Game = (function () {
         if (playerNumber == 1) {
             if (ownPlayer === 'undefined' || ownPlayer === null) {
                 ownPlayer = new Player('img/player1.png', standardSpriteWidth, standardSpriteHeight, Scene.spawnPlayer1, Scene.ground, standardWidth, standardHeight);
-
-                // _init();
             }
 
             if (players.length > 1) {
@@ -507,8 +494,6 @@ var Game = (function () {
             ownPlayer = new Player('img/player2.png', standardSpriteWidth, standardSpriteHeight, Scene.spawnPlayer2, Scene.ground, standardWidth, standardHeight);
 
             enemyPlayer = new Player('img/player1.png', standardSpriteWidth, standardSpriteHeight, Scene.spawnPlayer1, Scene.ground, standardWidth, standardHeight);
-
-            // _init();
         }
 
     });
@@ -531,17 +516,6 @@ var Game = (function () {
         enemyPlayer.spriteY = data.spriteY;
         enemyPlayer.spriteWidth = data.spriteWidth;
         enemyPlayer.spriteHeight = data.spriteHeight;
-
-        // for (var i in data) {
-        //
-        //     if (data[i].playerNumber != playerNumber) {
-        //
-        //         dataPlayer = data[i].player;
-        //
-        //         enemyPlayer.x = dataPlayer.x;
-        //         enemyPlayer.y = dataPlayer.y;
-        //     }
-        // }
     });
 
     socket.on('update health', function (health) {
