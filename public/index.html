@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Fight &amp; Win</title>
+
+        <link rel="stylesheet" href="css/style.css">
+
+        <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+
+        <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    </head>
+
+    <body>
+        <div id="registration_container">
+            <h1>Fight &amp; Win</h1>
+    
+            <div id="registration">
+    
+                <h2>Choose your Nickname:</h2>
+    
+                <input id="nickname" type="text" placeholder="Nickname" maxlength="11">
+                
+                <span id="play_button">Play!</span>
+            </div>
+        </div>
+
+        <canvas class="hide" id="canvas" width="720" height="405">
+            Canvas not supported by your browser
+        </canvas>
+
+        <!-- scripts -->
+        <script src="js/scene.js"></script>
+        <script src="js/player.js"></script>
+        <script src="js/game.js"></script>
+    </body>
+</html>

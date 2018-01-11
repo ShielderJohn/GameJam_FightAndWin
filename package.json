@@ -1,0 +1,13 @@
+{
+  "name": "Fight-Win",
+  "description": "Fighting/gambling 2D game using HTML5 canvas, JS, NodeJS and Socket.io",
+  "author": "Juan Escudero",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "body-parser": "*",
+    "express": "*",
+    "socket.io": "^1.4.5"
+  }
+}
